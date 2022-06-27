@@ -41,3 +41,12 @@
 #
 #  >>> Escriba su codigo a partir de este punto <<<
 #
+cat data.csv > datal.csv
+sed 's/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\([0-9][0-9]\)/20\3-\2-\1/g' datal.csv > datal1.csv
+sed 's/\([0-9]\)\/\([0-9]\)\/\([0-9][0-9][0-9][0-9]\);/\3-0\2-0\1;/g' datal1.csv > datal2.csv
+cat datal2.csv |tr '[:lower:]' '[:upper:]'| tr ',' '.'| tr ';' ','>datal3.csv
+sed 's/,,/,\\N,/g' datal3.csv>datal4.csv
+sed 's/,N/,\\N/g' datal4.csv > datal5.csv
+sed 's/\([0-9][0-9][0-9][0-9]\)-\([0-9][0-9]\)-\([0-9][0-9]\),\(\\[A-Z]\),\(\\[A-Z]\),/\1-\2-\3,\4,\5,\\N/g' datal5.csv > datal6.csv
+sed 's/\(2014\)-\(05\)-\(12\),\(C\),\(\\[A-Z]\),/\1-\2-\3,\4,\5,\\N/g' datal6.csv > datal7.csv
+cat datal7.csv > output.csv
